@@ -16,14 +16,21 @@ app.post("/todos", async (req, res) => {
   );
   try {
     console.log(req.body);
-    res.json(newTodo.rows[0]);
+    res.json(newTodo.rows);
   } catch (error) {
     console.error(error);
   }
 });
 
 //get all todos
-
+app.get("/", async (req, res) => {
+  try {
+    const alltodos = await pool.query("SELECT * FROM todo");
+    res.json(alltodos.rows);
+  } catch (error) {
+    console.error(error);
+  }
+});
 
 //get a todo
 //update a todo
