@@ -33,7 +33,19 @@ app.get("/", async (req, res) => {
 });
 
 //get a todo
+app.get("/todos/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    console.log("params", req.params);
+    const todo = await pool.query("SELECT * FROM TODO WHere todo_id=$1", [id]);
+    res.send(todo.rows);
+    console.log(req.params);
+  } catch (error) {
+    console.error(error);
+  }
+});
 //update a todo
+
 //delete todo
 
 app.listen(5000, () => {
