@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 const ListTodos = () => {
+  const getTodos = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/");
+      const jsonData = await res.json(); //(.json()) convert JSON=====>js bject
+      console.log(jsonData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    getTodos();
+  }, []);
   return (
     <div className="p-5  d-flex justify-content-center">
       <Table striped bordered hover style={{ width: "60%" }}>
@@ -13,16 +25,8 @@ const ListTodos = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-          </tr>
+          <tr></tr>
+          <tr></tr>
         </tbody>
       </Table>{" "}
     </div>
