@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import PropTypes from "prop-types";
 
 const EditTodo = ({ todo, getTodos }) => {
-  const [description, setDescription] = useState(todo.description);
+  const [descriptiontest, setDescription] = useState(todo.description);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -13,7 +13,8 @@ const EditTodo = ({ todo, getTodos }) => {
 
   const handleEditTodo = async () => {
     try {
-      const body = { description };
+      const body = { description: descriptiontest };
+      console.log("bodyyyy", body);
       const response = await fetch(
         `http://localhost:5000/todos/update/${todo.todo_id}`,
         {

@@ -6,7 +6,7 @@ const InputTodo = () => {
   const onSubmitFrom = async (e) => {
     e.preventDefault();
     try {
-      const body = { description };
+      const body = { description :description};
       const res = await fetch("http://localhost:5000/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
