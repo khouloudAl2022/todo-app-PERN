@@ -3,7 +3,13 @@ const app = express();
 const cors = require("cors");
 const pool = require("./db");
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: "GET, PUT, POST, DELETE", // Include allowed methods
+    allowedHeaders: "Content-Type, Authorization",
+  })
+);
 app.use(express.json());
 //routes//
 //create todo
@@ -15,7 +21,6 @@ app.post("/todos", async (req, res) => {
     [description]
   );
   try {
-    console.log(req.body);
     res.json(newTodo.rows);
   } catch (error) {
     console.error(error);
@@ -62,10 +67,8 @@ app.put("/todos/update/:id", async (req, res) => {
 app.delete("/todos/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const todoDeleted = await pool.query("DELETE FROM todo WHERE todo_id=$1", [
-      id,
-    ]);
-    res.send(todoDeleted);
+    await pool.query("DELETE FROM todo WHERE todo_id=$1", [id]);
+    res.send("todo was deleted");
   } catch (error) {
     console.error(error);
   }

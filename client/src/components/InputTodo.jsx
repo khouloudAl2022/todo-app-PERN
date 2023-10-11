@@ -10,8 +10,9 @@ const InputTodo = () => {
       const res = await fetch("http://localhost:5000/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body), // convert js object =====> json 
+        body: JSON.stringify(body), // convert js object =====> json
       });
+      setDescription("");
       console.log(res);
     } catch (error) {
       console.error(error);
